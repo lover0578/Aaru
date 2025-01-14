@@ -30,23 +30,6 @@ body {
   border-radius: 50%;
 }
 
-.paper.image {
-  padding: 10px;
-}
-
-.paper.image p {
-  font-size: 30px;
-  margin: 5px 0;
-}
-
-img {
-  max-height: 200px;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  user-select: none;
-}
-
 .paper.heart::after {
   content: "";
   background-image: url("./heart.webp"), linear-gradient(45deg, #ff6b6b, #ff8787);
@@ -69,47 +52,58 @@ p {
   user-select: none;
 }
 
-/* Mobile Responsive Styles */
+/* General Styles for .paper.image */
+.paper.image {
+  padding: 0; /* Remove extra padding */
+  width: auto; /* Let the container size dynamically adjust to the content */
+  max-width: 100%; /* Ensure it doesn’t exceed the screen width */
+  display: flex; /* Use flexbox for alignment */
+  flex-direction: column; /* Stack content vertically */
+  align-items: center; /* Center content horizontally */
+  margin: 0 auto; /* Center the container */
+  box-shadow: none; /* Optional: Remove unnecessary shadow */
+}
+
+/* Image Styling */
+img {
+  width: 100%; /* Allow the image to fill the container */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 300px; /* Adjust to a suitable maximum size for mobile screens */
+  display: block; /* Remove any inline spacing */
+  margin: 0 auto; /* Center the image */
+}
+
+/* Text Inside the Paper */
+.paper.image p {
+  font-size: 18px; /* Adjust text size for mobile */
+  margin: 10px 0; /* Add space between the text and the image */
+  text-align: center; /* Center align the text */
+}
+
+/* Mobile Responsive Adjustments */
 @media screen and (max-width: 768px) {
-  .paper {
-    padding: 10px; /* Reduce padding for smaller screens */
-    width: fit-content; /* Adjust width to content */
-    max-width: 100%; /* Prevent overflow */
-    box-sizing: border-box; /* Include padding in width calculations */
-    margin: 0 auto; /* Center the paper */
-  }
-  
   .paper.image {
-    padding: 5px; /* Minimize padding around the image */
-    width: fit-content; /* Shrink to fit image content */
-    max-width: 100%; /* Ensure it doesn’t exceed the viewport width */
-    margin: 0 auto; /* Center the paper */
-    display: flex; /* Add flexbox for better alignment */
-    flex-direction: column; /* Ensure content stacks vertically */
-    align-items: center; /* Center align content */
+    padding: 0; /* Remove unnecessary padding */
+    max-width: 100%; /* Ensure the paper fits within the screen width */
   }
 
   img {
-    max-width: 100%; /* Ensure the image scales with the paper */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Remove inline spacing */
+    max-width: 100%; /* Ensure image responsiveness */
   }
 
   .paper.image p {
-    font-size: 18px; /* Adjust text size for mobile */
-    margin: 10px 0 0; /* Reduce margins around text */
-    text-align: center; /* Center the text */
+    font-size: 16px; /* Reduce text size for smaller screens */
   }
 }
 
 /* Extra small devices */
 @media screen and (max-width: 320px) {
-  .paper.image {
-    padding: 5px; /* Minimize padding */
+  img {
+    max-width: 280px; /* Constrain image size on very small screens */
   }
 
-  img {
-    max-width: 100%; /* Ensure the image fits within the screen */
-    height: auto;
+  .paper.image p {
+    font-size: 14px; /* Further reduce text size */
   }
 }
+
