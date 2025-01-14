@@ -1,19 +1,19 @@
 // Create a single audio instance that we'll reuse
 
-const backgroundAudio = new Audio('audio/song.mp3');
+const backgroundAudio = new Audio('audio/song1.mp3');
 let audioInitialized = false;
 
 // Function to handle audio initialization
 function initializeAudio() {
   if (!audioInitialized) {
-    backgroundAudio.currentTime = 66; // Start at 1:00
+    backgroundAudio.currentTime = 46; // Start at 1:00
     backgroundAudio.play()
       .then(() => {
         console.log('Audio started playing');
         // Stop the audio after 40 seconds
         setTimeout(() => {
           backgroundAudio.pause();
-        }, 40000);
+        }, 42000);
       })
       .catch(error => {
         console.error('Audio playback failed:', error);
