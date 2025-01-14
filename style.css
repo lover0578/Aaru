@@ -68,13 +68,44 @@ p {
   user-select: none;
 }
 
-/* Media Queries for Mobile Responsiveness */
+/* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
+  .paper {
+    padding: 20px 30px; /* Reduced side padding on mobile */
+  }
+  
+  .paper.image {
+    padding: 15px;
+    width: 85vw; /* Make paper width relative to viewport */
+    max-width: 400px; /* Maximum width for larger phones */
+  }
+
   img {
-    max-width: 100%;
+    max-height: 300px; /* Larger max-height for images */
+    width: 100%;
     height: auto;
     object-fit: contain;
     display: block;
     margin: 0 auto;
+  }
+
+  .paper.image p {
+    font-size: 24px; /* Slightly smaller font for better fit */
+    margin: 10px 0;
+  }
+}
+
+/* Small phones */
+@media screen and (max-width: 480px) {
+  .paper {
+    padding: 15px 20px; /* Even smaller padding for very small screens */
+  }
+  
+  .paper.image {
+    width: 90vw;
+  }
+
+  img {
+    max-height: 250px;
   }
 }
