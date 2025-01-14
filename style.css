@@ -72,44 +72,44 @@ p {
 /* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
   .paper {
-    padding: 10px;
-    width: 100%; /* Ensure it spans the available width */
-    box-sizing: border-box; /* Include padding in the width calculation */
+    padding: 10px; /* Reduce padding for smaller screens */
+    width: fit-content; /* Adjust width to content */
+    max-width: 100%; /* Prevent overflow */
+    box-sizing: border-box; /* Include padding in width calculations */
+    margin: 0 auto; /* Center the paper */
   }
   
   .paper.image {
-    padding: 10px; /* Reduce padding for smaller screens */
-    max-width: 100%; /* Allow it to take the full width of the viewport */
+    padding: 5px; /* Minimize padding around the image */
+    width: fit-content; /* Shrink to fit image content */
+    max-width: 100%; /* Ensure it doesn’t exceed the viewport width */
     margin: 0 auto; /* Center the paper */
+    display: flex; /* Add flexbox for better alignment */
+    flex-direction: column; /* Ensure content stacks vertically */
+    align-items: center; /* Center align content */
   }
 
   img {
     max-width: 100%; /* Ensure the image scales with the paper */
-    height: auto; /* Maintain the aspect ratio */
-    display: block;
-    margin: 0 auto;
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove inline spacing */
   }
 
   .paper.image p {
-    font-size: 20px; /* Reduce text size for mobile */
-    margin: 10px 0;
-    text-align: center;
-  }
-
-  /* Text-only papers */
-  .paper:not(.image):not(.heart) {
-    padding: 10px 20px;
+    font-size: 18px; /* Adjust text size for mobile */
+    margin: 10px 0 0; /* Reduce margins around text */
+    text-align: center; /* Center the text */
   }
 }
 
 /* Extra small devices */
 @media screen and (max-width: 320px) {
   .paper.image {
-    padding: 8px; /* Adjust padding for very small screens */
+    padding: 5px; /* Minimize padding */
   }
-  
+
   img {
-    max-width: 100%; /* Ensure it fits within the paper */
+    max-width: 100%; /* Ensure the image fits within the screen */
     height: auto;
   }
 }
