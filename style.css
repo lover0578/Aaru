@@ -72,45 +72,44 @@ p {
 /* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
   .paper {
-    padding: 15px;
-    width: auto;
+    padding: 10px;
+    width: 100%; /* Ensure it spans the available width */
+    box-sizing: border-box; /* Include padding in the width calculation */
   }
   
   .paper.image {
-    padding: 10px;
-    width: auto;
-    max-width: 320px;  /* Match common mobile screen sizes */
-    margin: 0 auto;
+    padding: 10px; /* Reduce padding for smaller screens */
+    max-width: 100%; /* Allow it to take the full width of the viewport */
+    margin: 0 auto; /* Center the paper */
   }
 
   img {
-    max-width: 300px;  /* Slightly smaller than paper max-width */
-    max-height: none;  /* Remove max-height constraint */
-    width: 100%;
-    height: auto;
+    max-width: 100%; /* Ensure the image scales with the paper */
+    height: auto; /* Maintain the aspect ratio */
     display: block;
     margin: 0 auto;
   }
 
   .paper.image p {
-    font-size: 24px;
-    margin: 5px 0;
+    font-size: 20px; /* Reduce text size for mobile */
+    margin: 10px 0;
     text-align: center;
   }
 
   /* Text-only papers */
   .paper:not(.image):not(.heart) {
-    padding: 15px 30px;
+    padding: 10px 20px;
   }
 }
 
 /* Extra small devices */
 @media screen and (max-width: 320px) {
   .paper.image {
-    max-width: 280px;
+    padding: 8px; /* Adjust padding for very small screens */
   }
   
   img {
-    max-width: 260px;
+    max-width: 100%; /* Ensure it fits within the paper */
+    height: auto;
   }
 }
