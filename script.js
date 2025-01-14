@@ -5,7 +5,7 @@ let audioInitialized = false;
 // Function to handle audio initialization
 function initializeAudio() {
   if (!audioInitialized) {
-    backgroundAudio.currentTime = 60; // Start at 1:00
+    backgroundAudio.currentTime = 66; // Start at 1:00
     backgroundAudio.play()
       .then(() => {
         console.log('Audio started playing');
@@ -42,20 +42,21 @@ class Paper {
   }
 
   init(paper) {
-    // Add click handler to initialize audio
+    // Add click/touchstart handler to initialize audio
     paper.addEventListener('click', initializeAudio);
+    paper.addEventListener('touchstart', initializeAudio);
 
-    document.addEventListener('mousemove', (e) => {
+    const handleMove = (x, y) => {
       if (!this.rotating) {
-        this.mouseX = e.clientX;
-        this.mouseY = e.clientY;
+        this.mouseX = x;
+        this.mouseY = y;
 
         this.velX = this.mouseX - this.prevMouseX;
         this.velY = this.mouseY - this.prevMouseY;
       }
 
-      const dirX = e.clientX - this.mouseTouchX;
-      const dirY = e.clientY - this.mouseTouchY;
+      const dirX = x - this.mouseTouchX;
+      const dirY = y - this.mouseTouchY;
       const dirLength = Math.sqrt(dirX * dirX + dirY * dirY);
       const dirNormalizedX = dirX / dirLength;
       const dirNormalizedY = dirY / dirLength;
@@ -77,29 +78,52 @@ class Paper {
 
         paper.style.transform = `translateX(${this.currentPaperX}px) translateY(${this.currentPaperY}px) rotateZ(${this.rotation}deg)`;
       }
-    });
+    };
 
-    paper.addEventListener('mousedown', (e) => {
+    // Handle mouse and touch move
+    const moveHandler = (e) => {
+      if (e.touches) {
+        handleMove(e.touches[0].clientX, e.touches[0].clientY);
+      } else {
+        handleMove(e.clientX, e.clientY);
+      }
+    };
+
+    document.addEventListener('mousemove', moveHandler);
+    document.addEventListener('touchmove', moveHandler);
+
+    const startHandler = (e) => {
       if (this.holdingPaper) return;
-      this.holdingPaper = true;
 
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+      this.holdingPaper = true;
       paper.style.zIndex = highestZ;
       highestZ += 1;
 
-      if (e.button === 0) {
-        this.mouseTouchX = this.mouseX;
-        this.mouseTouchY = this.mouseY;
-        this.prevMouseX = this.mouseX;
-        this.prevMouseY = this.mouseY;
+      this.mouseTouchX = x;
+      this.mouseTouchY = y;
+      this.prevMouseX = x;
+      this.prevMouseY = y;
+
+      if (e.touches) {
+        e.preventDefault(); // Prevent scrolling on touch
       }
-      if (e.button === 2) {
-        this.rotating = true;
-      }
-    });
-    window.addEventListener('mouseup', () => {
+    };
+
+    const endHandler = () => {
       this.holdingPaper = false;
       this.rotating = false;
-    });
+    };
+
+    // Bind mouse and touch start events
+    paper.addEventListener('mousedown', startHandler);
+    paper.addEventListener('touchstart', startHandler);
+
+    // Bind mouse and touch end events
+    window.addEventListener('mouseup', endHandler);
+    window.addEventListener('touchend', endHandler);
   }
 }
 
