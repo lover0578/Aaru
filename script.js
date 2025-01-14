@@ -1,4 +1,5 @@
 // Create a single audio instance that we'll reuse
+
 const backgroundAudio = new Audio('audio/song.mp3');
 let audioInitialized = false;
 
